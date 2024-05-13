@@ -1,0 +1,8 @@
+# Brightness file
+brightness_file = "/sys/class/backlight/acpi_video0/brightness"
+
+# Max. brightness file
+max_brightness_file = "/sys/class/backlight/acpi_video0/max_brightness"
+
+# Adjustment step count
+step_count = 1
