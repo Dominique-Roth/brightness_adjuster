@@ -16,9 +16,8 @@ func main() {
 
     // ToDo: Read brightness file from config file
     body, err := os.ReadFile("/sys/class/backlight/acpi_video0/brightness")
-    if err != nil {
-        panic(err)
-    }
+    check(err)
+
     input_brightness := strings.TrimSuffix(string(body), "\n")
     current_brightness, err := strconv.Atoi(input_brightness)
     check(err)
