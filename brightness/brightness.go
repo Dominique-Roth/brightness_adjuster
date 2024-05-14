@@ -5,6 +5,7 @@ import (
     "fmt"
     "strings"
     "strconv"
+    "math"
     
     "brightness_adjuster/utils"
     "brightness_adjuster/config"
@@ -39,17 +40,11 @@ func adjust_brightness(
     }
     max_brightness := get_max_brightness(config.Max_brightness_file)
     
-    // ToDo: Read max brightness from file
-    if new_brightness > max_brightness {
-        new_brightness = max_brightness
-    } else if new_brightness < 0 {
-        // ToDo: Add options to prevent 0 and default to 1
-        new_brightness = 0
-    }
+    new_brightness = int(math.Min(float64(new_brightness), float64(max_brightness)))
+    new_brightness = int(math.Max(float64(new_brightness), 0))
 
     fmt.Printf("Writing new brightness %d\n", new_brightness)
     text_to_write_to_file := []byte(strconv.Itoa(new_brightness))
-    // ToDo: Read brightness file from config file
     err = os.WriteFile(config.Brightness_file, text_to_write_to_file, 644)
     utils.Check(err)
 }
